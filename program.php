@@ -11,6 +11,7 @@ $fullWordsFile = fopen("fullwords.txt", "w");
 $uniquesFile = fopen("uniques.txt", "w");
 
 $uniques = array();
+$fullWords = array();
 $duplicates = array(); 
 
 if($file) {
@@ -22,26 +23,22 @@ if($file) {
 	    $maxPosition = $stringSize - 4; 
 	    for($start = 0; $start <= $maxPosition; $start++) {
 	        $snip = substr($word, $start, 4);
-			// if you hit the snip more than once 
-			if(in_array($snip, $duplicates)) {
-			    continue;
+			if(isset($uniques[$snip])) {			
+				unset($uniques[$snip]);			
+			} else {	    
+			    $uniques[$snip] = $word;				
 			}
-			if(isset($uniques[$snip])) {
-				unset($uniques[$snip]);
-			    $duplicates[] = $snip;
-			} else {			    
-			    $uniques[$snip] = $word;
-			}
-		    // error_log("snip = " . $snip); 
+		    //error_log("snip = " . $snip); 
 		} 
     }
 }
     
 ksort($uniques);
 foreach($uniques as $key => $value) {
-	fwrite($fullWordsFile, $value."\n");
 	fwrite($uniquesFile, $key."\n");
+	fwrite($fullWordsFile, $value."\n");
 }
+
 
 fclose($file);
 fclose($fullWordsFile);
