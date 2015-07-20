@@ -39,8 +39,8 @@ if($file) {
     
 ksort($uniques);
 foreach($uniques as $key => $value) {
-	fwrite($fullWordsFile, $value.'\n');
-	fwrite($uniquesFile, $key.'\n');
+	fwrite($fullWordsFile, $value."\n");
+	fwrite($uniquesFile, $key."\n");
 }
 
 fclose($file);

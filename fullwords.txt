@@ -1,1 +1,5 @@
-bicycle\nbook\nrecycle\nbicycle\nrecycle\n
+bicycle
+book
+recycle
+bicycle
+recycle
